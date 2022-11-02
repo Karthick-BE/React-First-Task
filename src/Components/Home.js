@@ -33,7 +33,7 @@ function Home() {
 
   useEffect(() => {
     getData();
-  });
+  },[]);
 
   const createpost = () => {
     navigate("/createpost");
