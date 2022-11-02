@@ -1,9 +1,9 @@
-import Home from "./components/Home";
-import ToDo from "./components/ToDo";
+import Home from "./Components/Home";
+import ToDo from "./Components/ToDo";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
-import About from "./components/About";
-import Createpost from "./components/Createpost";
+import Header from "./Components/Header";
+import About from "./Components/About";
+import Createpost from "./Components/Createpost";
 import "./App.css";
 
 function App() {
