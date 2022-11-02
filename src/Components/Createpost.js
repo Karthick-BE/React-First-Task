@@ -57,7 +57,11 @@ function CreatePost() {
     }
   }
   const DeleteData = () => {
-    setUserData([]);
+    setId("");
+    setPostId("");
+    setName("");
+    setEmail("");
+    setBody("");
   }
 
   return (
