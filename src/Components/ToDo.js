@@ -4,7 +4,7 @@ import ReactPaginate from "react-paginate";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import "./ToDo.css";
-import{Col,Row} from 'react-bootstrap'
+import { Col, Row } from "react-bootstrap";
 function ToDo() {
   const [data, setData] = useState([]);
   const [offset, setOffset] = useState(0);
@@ -13,8 +13,7 @@ function ToDo() {
 
   useEffect(() => {
     loadUserData();
-  },[offset]);
-  
+  }, [offset]);
 
   const loadUserData = async () => {
     const res = await axios.get("https://gorest.co.in/public/v2/todos", {
@@ -34,93 +33,94 @@ function ToDo() {
     setOffset(selectedPage * perpage);
   };
   const handleFilter = async (value) => {
-    const res1= await axios
-      .get(`https://gorest.co.in/public/v2/todos?status=${value}`, {
+    const res1 = await axios.get(
+      `https://gorest.co.in/public/v2/todos?status=${value}`,
+      {
         headers: {
           Authorization: `Bearer ${"3ba9c6cb07331c5b006b56354ec8dd932cdc82c5d11ac8e67ced488e180323db"}`,
           "Content-Type": "application/json",
         },
-      })
-      const user = res1.data;
+      }
+    );
+    const user = res1.data;
     const slice = user.slice(offset, offset + perpage);
     setData(slice);
-
   };
   const handleData = async () => {
-    const res2= await axios
-      .get(`https://gorest.co.in/public/v2/todos`, {
-        headers: {
-          Authorization: `Bearer ${"3ba9c6cb07331c5b006b56354ec8dd932cdc82c5d11ac8e67ced488e180323db"}`,
-          "Content-Type": "application/json",
-        },
-      })
-      const user = res2.data;
+    const res2 = await axios.get(`https://gorest.co.in/public/v2/todos`, {
+      headers: {
+        Authorization: `Bearer ${"3ba9c6cb07331c5b006b56354ec8dd932cdc82c5d11ac8e67ced488e180323db"}`,
+        "Content-Type": "application/json",
+      },
+    });
+    const user = res2.data;
     const slice = user.slice(offset, offset + perpage);
     setData(slice);
   };
 
   return (
-    <div className="w-100 "  style={{ marginTop: "20px" }}>
-      <h2>Status Filter</h2>
+    <div className="w-100 " style={{ marginTop: "20px" }}>
+      <h4>Status Progress</h4>
       <Row>
         <Col></Col>
+        <Col></Col>
+        <Col></Col>
         <Col>
-      <Row><Col>
-      <button className="btn btn-primary m-1 " onClick={() => handleData()}>
-        All
-      </button></Col>
-     <Col> <button
-        className="btn btn-success m-1 completedbutton"
-        onClick={() => handleFilter("completed")}
-      >
-        Completed
-      </button></Col>
-     <Col> <button
-        className="btn btn-danger m-1 pendingbutton"
-        onClick={() => handleFilter("pending")}
-      >
-        Pending
-      </button></Col></Row>
-      </Col>
-      <Col></Col></Row>
+              <button
+                className="btn btn-primary mt-3 mb-3 "
+                onClick={() => handleData()}
+              >
+                Reset
+              </button>&nbsp;
+              <button
+                className="btn btn-success mt-3 mb-3 completedbutton"
+                onClick={() => handleFilter("completed")}
+              >
+                Completed
+              </button>&nbsp;
+              <button
+                className="btn btn-danger mt-3 mb-3 pendingbutton"
+                onClick={() => handleFilter("pending")}
+              >
+                Pending
+              </button>
+              </Col>
+          </Row>
 
-     <Row>
-      <Col>
-    <div className="table-responsive">
-          <table className="table">
-            <thead className="table-dark ">
-              <tr>
-                <th>User_Id</th>
-                <th>Title</th>
-                <th>Due_On</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            {data.length === 0 ? (
-              <tbody>
+      <Row>
+        <Col>
+          <div className="table-responsive">
+            <table className="table">
+              <thead className="table-dark ">
                 <tr>
-                  <td> Unable to Fund Data </td>
+                  <th>User_Id</th>
+                  <th>Title</th>
+                  <th>Due_On</th>
+                  <th>Status</th>
                 </tr>
-              </tbody>
-            ) : (
-              data.map((e, index) => (
-                <tbody key={index}>
+              </thead>
+              {data.length === 0 ? (
+                <tbody>
                   <tr>
-                    <td>{e.user_id}</td>
-                    <td>{e.title}</td>
-                    <td>{moment(e.due_on).format("DD/MM/YYYY")}</td>
-                    <td>{e.status}</td>
+                    <td> Unable to Fund Data </td>
                   </tr>
                 </tbody>
-              ))
-            )}
-           
-           
-          </table>
+              ) : (
+                data.map((e, index) => (
+                  <tbody key={index}>
+                    <tr>
+                      <td>{e.user_id}</td>
+                      <td>{e.title}</td>
+                      <td>{moment(e.due_on).format("DD/MM/YYYY")}</td>
+                      <td>{e.status}</td>
+                    </tr>
+                  </tbody>
+                ))
+              )}
+            </table>
           </div>
-          </Col>
-             </Row>
-       
+        </Col>
+      </Row>
 
       <ReactPaginate
         previousLabel={"prev"}
@@ -136,8 +136,9 @@ function ToDo() {
         activeClassName={"active"}
       />
 
-      <Link to={"/"} className="backtohomepagelink">Back to Home Page</Link>
-     
+      <Link to={"/"} className="backtohomepagelink">
+        Back to Home Page
+      </Link>
     </div>
   );
 }
