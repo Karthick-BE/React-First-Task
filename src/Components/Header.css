@@ -1,0 +1,12 @@
+.header{
+    text-decoration: none;
+   color: white;
+    background-color: #563D7C;
+    
+    justify-content: center;
+   font-weight:bold;
+    font-size: medium;
+}
+.header:hover{
+    color: deeppink;
+}
